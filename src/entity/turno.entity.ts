@@ -19,5 +19,7 @@ export class Turnos {
 
   //Esto creo que va con los joinColumns
 
+  
+
 
 }
