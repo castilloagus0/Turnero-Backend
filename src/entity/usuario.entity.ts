@@ -1,4 +1,6 @@
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { OneToMany } from 'typeorm';
+import { Turnos } from './turno.entity';
 
 @Entity('usuarios')
 export class Usuario {
@@ -25,4 +27,7 @@ export class Usuario {
 
   @Column({ type: 'datetime', nullable: false })
   nacimiento: Date;
+
+  @OneToMany(() => Turnos, (turno) => turno.usuario)
+  turnos: Turnos[];
 }

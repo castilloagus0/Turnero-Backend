@@ -1,7 +1,8 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, ManyToOne, JoinColumn, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
 import { Horarios } from './horarios.entity';
 import { Usuario } from './usuario.entity';
-
+import { Resenias } from './resenia.entity';
+import { HistorialEstado } from './historialEstado.entity';
 
 @Entity('turnos')
 export class Turnos {
@@ -11,15 +12,19 @@ export class Turnos {
   @Column({ type: 'datetime', nullable: false })
   fecha: Date;
 
-  @Column({ type: 'varchar', length: 100 })
-  horario: Horarios
+  @ManyToOne(() => Horarios, (horario) => horario.turnos)
+  @JoinColumn({ name: 'horario_id' })
+  horario: Horarios;
 
-  @Column({ type: 'varchar', length: 100 })
-  usuario: Usuario
+  @ManyToOne(() => Usuario, (usuario) => usuario.turnos)
+  @JoinColumn({ name: 'usuario_id' })
+  usuario: Usuario;
 
-  //Esto creo que va con los joinColumns
+  @ManyToOne(() => Resenias, (resenia) => resenia.turno, { nullable: true })
+  @JoinColumn({ name: 'resenia_id' })
+  resenia: Resenias | null;
 
-  
-
+  @OneToMany(() => HistorialEstado, (historial) => historial.turno)
+  estado: HistorialEstado;
 
 }
