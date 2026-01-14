@@ -34,7 +34,7 @@ import { AbstractServicioB } from './entity/servicesBarberia.entity';
     TypeOrmModule.forRoot({
       type: (process.env.DB_TYPE || 'mysql') as any,
       host: process.env.MYSQL_HOST || 'localhost',
-      port: parseInt(process.env.MYSQL_PORT || '3307', 10),
+      port: parseInt(process.env.MYSQL_PORT || '3308', 10),
       username: 'root',
       password: process.env.MYSQL_ROOT_PASS || '',
       database: process.env.MYSQL_DATABASE || 'test',

@@ -7,8 +7,8 @@ export class UsuarioController {
     constructor(private readonly userService: UsuarioService) {}
 
     @Post("register")
-      createUser(@Body() createUserDto: CreateUserDto) {
-        return this.userService.create(createUserDto);
+      async createUser(@Body() createUserDto: CreateUserDto) {
+        return await this.userService.createUser(createUserDto);
     }
 
 

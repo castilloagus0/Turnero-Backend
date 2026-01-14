@@ -19,14 +19,14 @@ export class Usuario {
   @Column({ type: 'varchar', length: 50 })
   telefono: string;
 
-  @Column({ type: 'varchar', length: 20 })
-  rol: string;
-
   @Column({ type: 'varchar', length: 70 })
   password: string;
 
-  @Column({ type: 'datetime', nullable: false })
+  @Column({ type: 'date', nullable: false })
   nacimiento: Date;
+
+  @Column({ type: 'varchar', length: 20 })
+  rol: string;
 
   @OneToMany(() => Turnos, (turno) => turno.usuario)
   turnos: Turnos[];

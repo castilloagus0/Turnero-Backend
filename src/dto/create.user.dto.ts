@@ -4,40 +4,38 @@ import {
   IsString,
   Matches,
   MaxLength,
-  MinLength,
+  MinLength
 } from "class-validator";
+
+import { Type } from "class-transformer";
 
 export class CreateUserDto {
 
   @IsString()
   @MinLength(2)
   @MaxLength(15)
-  name: string;
+  nombre: string;
   
   @IsString()
   @MinLength(2)
   @MaxLength(15)
-  lastname: string;
+  apellido: string;
   
   @IsString()
   @IsEmail()
   email: string;
 
   @IsString()
-  phone: string;
+  telefono: string;
 
   @IsString()
   @MinLength(6)
   @MaxLength(50)
-  @Matches(/(?:(?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/, {
-    message:
-      "The password must have a Uppercase, lowercase letter and a number",
-  })
   password: string;
 
+  @Type(() => Date)
   @IsDate()
-  birthdate: Date;
-
-  @IsString({ each: true })
-  rol: string;
+  nacimiento: Date;
 }
+
+
