@@ -1,6 +1,12 @@
-import { Controller, Post, Body } from '@nestjs/common';
+import { Controller, Post, Body, Put, Patch, Param } from '@nestjs/common';
+
+//Service
 import { UsuarioService } from 'src/service/usuario.service';
+
+// Dto
 import { CreateUserDto } from 'src/dto/create.user.dto';
+import { EditUserDto } from 'src/dto/edit.user.dto';
+import { ChangePasswordDto } from 'src/dto/change.password.dto';
 
 @Controller('user')
 export class UsuarioController {
@@ -10,6 +16,27 @@ export class UsuarioController {
       async createUser(@Body() createUserDto: CreateUserDto) {
         return await this.userService.createUser(createUserDto);
     }
+
+    //Revisar este endpoint
+    @Put('edit/:emailLog')
+    async editUser(@Body() editUserDto: EditUserDto, @Param('emailLog') emailLogueado: string) {
+        return await this.userService.editUser(editUserDto, emailLogueado);
+    }
+
+    @Patch('change-password/:emailLog')
+    async changePassword(@Body() changePasswordDto: ChangePasswordDto, @Param('emailLog') emailLogueado: string) { //Obtengo el email desde el localStorage
+        return await this.userService.changePassword(changePasswordDto, emailLogueado);
+    }
+
+    @Post('remember-acount/:emailLog')
+    async rememberAcount(@Param('emailLog') emailLogueado: string) {
+        return await this.userService.rememberAcount(emailLogueado);
+    }
+
+    // @Patch('reseet-password')
+    // async resetPassword(@Body() changePasswordDto: ChangePasswordDto, @Param('emailLog') emailLogueado: string) {
+    //     return await this.userService.changePassword(changePasswordDto, emailLogueado);
+    // }
 
 
 }
