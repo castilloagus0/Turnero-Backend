@@ -1,4 +1,4 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, PrimaryGeneratedColumn, CreateDateColumn } from 'typeorm';
 import { OneToMany } from 'typeorm';
 import { Turnos } from './turno.entity';
 
@@ -30,4 +30,8 @@ export class Usuario {
 
   @OneToMany(() => Turnos, (turno) => turno.usuario)
   turnos: Turnos[];
+
+  @CreateDateColumn()
+  fechaRegistro: Date;
+
 }

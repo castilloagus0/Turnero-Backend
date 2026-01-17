@@ -4,18 +4,11 @@ import {
   MinLength
 } from "class-validator";
 
-export class ChangePasswordDto {
-
-  @IsString()
-  @MinLength(0)
-  @MaxLength(50)
-  oldPassword: string;
-
+export class ReseetPasswordDto {
   @IsString()
   @MinLength(6)
   @MaxLength(50)
   newPassword: string;
-
 }
 
 

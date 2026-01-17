@@ -12,6 +12,14 @@ export class UsuarioRepository {
         private readonly usuarioRepository: Repository<Usuario>,
     ) {}    
 
+    async getUsuarios(): Promise<Usuario[] | null>{
+        return await this.usuarioRepository.find();
+    }
+
+    async getUsuario(id: number): Promise<Usuario | null> {
+        return await this.usuarioRepository.findOne({where: { id }});
+    }
+
     async findUserByEmail(email: string): Promise<Usuario | null> {
         const user = await this.usuarioRepository.findOne({ where: { email } });
         return user;

@@ -15,7 +15,6 @@ import { PagoModule } from './module/pago.module';
 import { SBarberiaModule } from './module/servicesBarberia.module';
 import { TurnoModule } from './module/turno.module';
 
-
 //Entities
 import { GaleryPhotos } from './entity/galeryPhotos.entity';
 import { Usuario } from './entity/usuario.entity';

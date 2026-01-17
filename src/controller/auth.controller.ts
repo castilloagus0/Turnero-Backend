@@ -1,43 +1,16 @@
 import { Controller, Post, Body, Get } from "@nestjs/common";
-//import { AuthService } from "./auth.service";
-// import { CreateUserDto } from "./dto/create-user.dto";
-// import { LoginUserDto } from "./dto/login-user.dto";
-// import { Auth } from "./decorators/auth.decorator";
-// import { ValidRoles } from "src/interfaces/valid-roles";
-// import { GetUser } from "./decorators/get-user.decorator";
-// import { User } from "./entities/User.entity";
+
+import { AuthService } from "src/service/auth.service";
+
+import { LoginDto } from "src/dto/login.dto";
 
 @Controller("auth")
 export class AuthController {
-//   constructor(private readonly authService: AuthService) {}
+    constructor(private readonly authService: AuthService){}
 
-  
-//   @Post("login")
-//   loginUser(@Body() loginUserDto: LoginUserDto) {
-//     return this.authService.login(loginUserDto);
-//   }
+    @Post("/login")
+    async loginUser(@Body() loginDto: LoginDto){
+        return this.authService.loginUser(loginDto)
+    }
 
-//   @Get("private")
-//   @Auth(ValidRoles.admin)
-//   privateRoute3(@GetUser() user: User) {
-//     return {
-//       ok: true,
-//       user,
-//     };
-//   }
-
-//   @Post("validate")
-//   @Auth()
-//   validateToken(@GetUser() user: User) {
-//     return {
-//       ok: true,
-//       user: {
-//         id: user.id,
-//         email: user.email,
-//         fullName: user.fullName,
-//         roles: user.roles,
-//         isActive: user.isActive
-//       }
-//     };
-//   }
 }

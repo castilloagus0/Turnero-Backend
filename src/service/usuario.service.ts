@@ -1,4 +1,4 @@
-import { Injectable, ConflictException, BadRequestException } from '@nestjs/common';
+import { Injectable, ConflictException, BadRequestException, UnauthorizedException } from '@nestjs/common';
 
 //Respository
 import { UsuarioRepository } from 'src/repository/usuario.repository';
@@ -11,6 +11,14 @@ import { find } from 'rxjs';
 export class UsuarioService {
 
     constructor(private readonly userRepository: UsuarioRepository) {}
+
+    async getUsuarios(){
+        return await this.userRepository.getUsuarios();
+    }
+
+    async getUsuario(id: number){
+        return await this.userRepository.getUsuario(id)
+    }
 
     async findUserByEmail(email: string) {
         return await this.userRepository.findUserByEmail(email);
@@ -26,7 +34,7 @@ export class UsuarioService {
             const userDB = {
                 ...createUserDto,
                 password: hashedPassword,
-                rol: 'user'
+                rol: 'user',
             }
             return await this.userRepository.createUser(userDB);
         }else{
@@ -36,8 +44,7 @@ export class UsuarioService {
 
     async editUser(editUserDto: any, emailLogueado: string) {
         const findUser = await this.findUserByEmail(emailLogueado);
-        console.log(findUser);
-
+        
         if(findUser !== null){
 
             const userDB = {
@@ -51,10 +58,15 @@ export class UsuarioService {
 
 
     async changePassword(changePasswordDto: any, emailLogueado: string) {
-
         const findUser = await this.findUserByEmail(emailLogueado);
 
         if(findUser !== null){
+
+            const comparePassword = await compareText(changePasswordDto.oldPassword, findUser.password)
+
+            if(!comparePassword){
+                throw new UnauthorizedException('La contraseña ingresada es incorrecta')
+            }
 
             const hashedPassword = await encryptText(changePasswordDto.newPassword);
 
@@ -85,6 +97,22 @@ export class UsuarioService {
 
         if(findUser !== null){
             await rememberAcount(emailLogueado);
+        }
+    }
+
+    async resetPassword(reseetPasswordDto: any, emailLogueado: string) {
+        const findUser = await this.findUserByEmail(emailLogueado);
+
+        if(findUser !== null){
+            const hashedPassword = await encryptText(reseetPasswordDto.newPassword);
+
+            const userDB = {
+                ...findUser,
+                password: hashedPassword
+            }
+            return await this.userRepository.saveUser(userDB);
+        }else{
+            throw new BadRequestException('El usuario no existe');
         }
     }
 
