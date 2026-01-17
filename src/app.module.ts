@@ -40,6 +40,7 @@ import { AbstractServicioB } from './entity/servicesBarberia.entity';
       entities: [GaleryPhotos, Usuario, Resenias, Horarios, HistorialEstado, PagoAbstract, Turnos, AbstractServicioB],
       autoLoadEntities: true,
       synchronize: true,
+      timezone: '+03:00',
     }),      
     GaleryPhotosModule,
     UsuarioModule,

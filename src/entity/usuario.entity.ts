@@ -31,7 +31,7 @@ export class Usuario {
   @OneToMany(() => Turnos, (turno) => turno.usuario)
   turnos: Turnos[];
 
-  @CreateDateColumn()
+  @CreateDateColumn({ type: 'datetime' })
   fechaRegistro: Date;
 
 }

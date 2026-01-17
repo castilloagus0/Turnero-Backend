@@ -1,4 +1,4 @@
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn, JoinColumn } from 'typeorm';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn, JoinColumn, CreateDateColumn } from 'typeorm';
 import { Usuario } from './usuario.entity';
 import { Turnos } from './turno.entity';
 
@@ -18,9 +18,9 @@ export class Resenias {
   @Column({ type: 'varchar', length: 255 })
   comentario: string;
 
-  @Column({ type: 'datetime', nullable: false })
-  fecha: Date;
-
+  @CreateDateColumn({ type: 'datetime' })
+  fechaRegistro: Date;
+  
   @OneToMany(() => Turnos, (turno) => turno.id)
   @JoinColumn({ name: 'turno_id' })
   turno: Turnos;
