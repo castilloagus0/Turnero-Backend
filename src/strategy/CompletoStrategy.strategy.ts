@@ -4,7 +4,7 @@ import { ServicioStrategy } from '../interface/servicioB.interface';
 
 
 @Injectable()
-export class ServicioCompleto implements ServicioStrategy {
+export class CorteCompleto implements ServicioStrategy {
   
     seleccionarTurno(): void {}
 
