@@ -17,7 +17,4 @@ export class ReseniaController {
     async createReview(@Body() review: ReviewDto, @Param('emailLog') emailLogueado: string){
         return this.reseniaService.createReview(review, emailLogueado)
     }
-
-
-
 }
