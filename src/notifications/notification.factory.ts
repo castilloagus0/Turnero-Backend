@@ -11,7 +11,7 @@ export class NotificacionFactory {
   ) {}
 
   // Este método devuelve la instancia correcta (INotificacion)
-  crearNotificacion(tipo: 'WHATSAPP'): INotificacion {
+  crearNotificacion(tipo: string): INotificacion {
     switch (tipo) {
       case 'WHATSAPP':
         return this.whatsapp;
