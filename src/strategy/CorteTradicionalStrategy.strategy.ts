@@ -13,10 +13,10 @@ export class CorteTradicional implements ServicioStrategy {
     }
 
     getPrecio(): number {
-        return 1; 
+        return 5000; 
     }
 
     getDuracionAproximada(): number {
-        return 1; 
+        return 20; 
     }
 }

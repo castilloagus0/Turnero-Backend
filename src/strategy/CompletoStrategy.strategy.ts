@@ -13,10 +13,10 @@ export class CorteCompleto implements ServicioStrategy {
     }
 
     getPrecio(): number {
-        return 1; 
+        return 6000; 
     }
 
     getDuracionAproximada(): number {
-        return 1; 
+        return 25; 
     }
 }

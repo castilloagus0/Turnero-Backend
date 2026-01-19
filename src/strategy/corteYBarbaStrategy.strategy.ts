@@ -13,10 +13,10 @@ export class CorteBarbaStrategy implements ServicioStrategy {
     }
 
     getPrecio(): number {
-        return 1; 
+        return 5500; 
     }
 
     getDuracionAproximada(): number {
-        return 1; 
+        return 25; 
     }
 }

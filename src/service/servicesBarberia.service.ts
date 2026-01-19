@@ -16,4 +16,19 @@ export class SBarberiaService {
         private readonly CorteCompleto: CorteCompleto
     ){}
 
+
+    getStrategy(nombreServicio: string): ServicioStrategy {
+        switch (nombreServicio.toUpperCase()) {
+            case 'CORTECEJAS':
+                return this.CorteYCejas;
+            case 'CORTEBARBA':
+                return this.CorteYBarba;
+            case 'CORTETRADICIONAL':
+                return this.CorteTradicional;
+            case 'CORTECOMPLETO':
+                return this.CorteCompleto;
+            default:
+                throw new Error('Servicio no encontrado');
+        }
+    }
 }
