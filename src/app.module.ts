@@ -14,6 +14,7 @@ import { HistorialEstadoModule } from './module/historialEstado.module';
 import { PagoModule } from './module/pago.module';
 import { SBarberiaModule } from './module/servicesBarberia.module';
 import { TurnoModule } from './module/turno.module';
+import { NotificacionesModule } from './module/notificaciones.module';
 
 //Entities
 import { GaleryPhotos } from './entity/galeryPhotos.entity';
@@ -51,6 +52,7 @@ import { AbstractServicioB } from './entity/servicesBarberia.entity';
     PagoModule,
     TurnoModule,
     SBarberiaModule,
+    NotificacionesModule
   ],
   controllers: [AppController],
   providers: [AppService],
