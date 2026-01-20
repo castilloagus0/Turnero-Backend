@@ -2,25 +2,28 @@ import { Injectable, Logger } from '@nestjs/common';
 import { HttpService } from '@nestjs/axios';
 import { lastValueFrom } from 'rxjs';
 import { INotificacion } from '../noti-interface/notificacion.interface';
+import { rememberTurno } from 'src/functions/rememberTurno';
 
 @Injectable()
 export class WhatsAppNotificacion implements INotificacion {
   private readonly logger = new Logger(WhatsAppNotificacion.name);
   
-  // Construimos la URL usando el ID que pusiste en el .env
   private readonly apiUrl = `https://graph.facebook.com/v17.0/${process.env.WHATSAPP_PHONE_ID}/messages`;
 
   constructor(private readonly httpService: HttpService) {}
 
-  async enviar(destinatario: string, mensaje: string): Promise<void> {
+  async enviar(destinatario: string, idTurno: number): Promise<void> {
+
+    //Antes tengo que llamar al getTurnoRepository para obtener los datos del turno
+    const mensaje = await rememberTurno(idTurno); //esto estaria mal
     
     const payload = {
       messaging_product: 'whatsapp',
       to: destinatario, // Ej: '549353...'
       type: 'template',
       template: {
-        name: 'hello_world', // Plantilla default de Sandbox
-        language: { code: 'en_US' }
+        name: 'recordatorio', // Plantilla default de Sandbox
+        language: { code: 'en_AR' }
       },
       text: { body: mensaje }
     };

@@ -1,3 +1,3 @@
 export interface INotificacion {
-  enviar(destinatario: string, asunto: string, mensaje: string): Promise<void>;
+  enviar(destinatario: string, idTurno: number): Promise<void>;
 }

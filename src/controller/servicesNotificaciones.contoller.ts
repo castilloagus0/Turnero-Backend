@@ -5,15 +5,16 @@ import { NotificacionFactory } from 'src/notifications/notification.factory';
 export class SNotificacionesController {
     constructor(private readonly notificacionFactory: NotificacionFactory) {}
 
-    @Post('send/:tipo/:destinatario/:asunto/:mensaje')
+    @Post('send/:tipo/:destinatario')
     async sendNotification(
-        @Param('tipo') tipo: string,
+        @Param('tipo') tipo: string, //wpp
         @Param('destinatario') destinatario: string,
-        @Param('asunto') asunto: string,
-        @Param('mensaje') mensaje: string,
+        @Param('idTurno') idTurno: number,
+        // @Param('asunto') asunto: string,
+        // @Param('mensaje') mensaje: string,
     ) {
         const notificacion = this.notificacionFactory.crearNotificacion(tipo);
-        await notificacion.enviar(destinatario, asunto, mensaje);
+        await notificacion.enviar(destinatario, idTurno);
     }
 
 }

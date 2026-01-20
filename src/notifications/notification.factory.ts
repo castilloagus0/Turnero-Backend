@@ -13,7 +13,7 @@ export class NotificacionFactory {
   // Este método devuelve la instancia correcta (INotificacion)
   crearNotificacion(tipo: string): INotificacion {
     switch (tipo) {
-      case 'WHATSAPP':
+      case 'whatsapp':
         return this.whatsapp;
       default:
         throw new BadRequestException(`El tipo de notificación ${tipo} no existe`);
