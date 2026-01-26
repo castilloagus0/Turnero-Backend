@@ -5,6 +5,9 @@ import { Turnos } from './turno.entity';
 export class HistorialEstado {
   @PrimaryGeneratedColumn()
   id: number;
+
+  @Column({ type: 'enum', enum: ['INICIADO', 'CANCELADO', 'FINALIZADO'], default: 'PENDIENTE' })
+  estado: string;
   
   @Column({ type: 'time' })
   horaInicio: string;

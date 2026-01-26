@@ -15,6 +15,12 @@ export class HorariosController {
         return await this.horariosSerivice.getHorarios();
     }
 
+    @Get(':id')
+    async getHorarioById(@Param('id') id: number){
+        return await this.horariosSerivice.getHorarioById(id);
+    }
+
+
     @Post('createHorarios')
     async createHorarios(@Body() createHorarioDto: CreateHorariosDto){
         return await this.horariosSerivice.createHorarios(createHorarioDto);

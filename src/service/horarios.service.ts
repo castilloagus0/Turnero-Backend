@@ -10,6 +10,10 @@ export class HorariosService {
         return await this.horariosRepository.getHorarios();
     }
 
+    async getHorarioById(id: number){
+        return await this.horariosRepository.getHorario(id);
+    }
+
     async createHorarios(createHorario: any){
         return await this.horariosRepository.createHorarios(createHorario);
     }

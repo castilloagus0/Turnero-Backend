@@ -1,4 +1,25 @@
 import { Injectable } from '@nestjs/common';
+import { TurnoRepository } from 'src/repository/turno.repository';
 
 @Injectable()
-export class TurnoService {}
+export class TurnoService {
+    constructor(private readonly turnoRepository: TurnoRepository) {}
+
+    async getTurnos() {
+        return await this.turnoRepository.getTurnos();
+    }
+
+    async getTurnoById(id: number) {
+        return await this.turnoRepository.getTurno(id);
+    }
+
+    async createTurno(turno) {
+        return await this.turnoRepository.createTurno(turno);
+    }
+
+    async updateTurno(id: number, turno) {
+        return await this.turnoRepository.editTurno(id, turno);
+    }
+    
+
+}

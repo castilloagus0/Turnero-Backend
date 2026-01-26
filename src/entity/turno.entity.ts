@@ -12,6 +12,9 @@ export class Turnos {
   @Column({ type: 'datetime', nullable: false })
   fecha: Date;
 
+  @Column({ type: 'enum', enum: ['PENDIENTE', 'INICIADO', 'CANCELADO', 'FINALIZADO'], default: 'PENDIENTE' })
+  estado: string;
+
   @ManyToOne(() => Horarios, (horario) => horario.turnos)
   @JoinColumn({ name: 'horario_id' })
   horario: Horarios;
@@ -24,7 +27,7 @@ export class Turnos {
   @JoinColumn({ name: 'resenia_id' })
   resenia: Resenias | null;
 
-  @OneToMany(() => HistorialEstado, (historial) => historial.turno)
-  estado: HistorialEstado;
+  // @OneToMany(() => HistorialEstado, (historial) => historial.turno)
+  // estado: HistorialEstado;
 
 }

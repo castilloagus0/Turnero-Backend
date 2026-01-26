@@ -25,6 +25,7 @@ import { HistorialEstado } from './entity/historialEstado.entity';
 import { PagoAbstract } from './entity/pago.entity';
 import { Turnos } from './entity/turno.entity';
 import { AbstractServicioB } from './entity/servicesBarberia.entity';
+import { TipoPagos } from './entity/tipoPagos.entity';
 
 @Module({
   imports: [
@@ -38,7 +39,7 @@ import { AbstractServicioB } from './entity/servicesBarberia.entity';
       username: 'root',
       password: process.env.MYSQL_ROOT_PASS || '',
       database: process.env.MYSQL_DATABASE || 'test',
-      entities: [GaleryPhotos, Usuario, Resenias, Horarios, HistorialEstado, PagoAbstract, Turnos, AbstractServicioB],
+      entities: [GaleryPhotos, Usuario, Resenias, Horarios, PagoAbstract, Turnos, AbstractServicioB, TipoPagos],
       autoLoadEntities: true,
       synchronize: true,
       timezone: '+03:00',
@@ -48,7 +49,7 @@ import { AbstractServicioB } from './entity/servicesBarberia.entity';
     ReseniaModule,
     HorariosModule,
     AuthModule,
-    HistorialEstadoModule,
+    // HistorialEstadoModule,
     PagoModule,
     TurnoModule,
     SBarberiaModule,
