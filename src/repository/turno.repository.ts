@@ -7,6 +7,7 @@ import { Turnos } from "src/entity/turno.entity";
 import { UsuarioRepository } from "./usuario.repository";
 import { HorariosRepository } from "./horarios.repository";
 import { TipoPagosRepository } from "./tipoPagos.repository";
+import { CreateTurnoDto } from "src/dto/create-turno.dto";
 
 
 @Injectable()
@@ -28,28 +29,10 @@ export class TurnoRepository {
     }
 
     async createTurno(createTurnoDto: any){
-        const existeTurno = await this.turnosRepository.findOne({where: { horario: createTurnoDto.horario }});
-        
-        if(existeTurno){
-            throw new Error('Ya existe un turno para el horario seleccionado');
-        }
 
-        const existeUsuario = await this.usuarioRepository.getUsuario(createTurnoDto.usuarioId);
+        const validations = await this.validationsCreateTurno(createTurnoDto)
         
-        if(!existeUsuario){
-            throw new Error('El usuario no existe');
-        }
-
-        const existeHorario = await this.horariosRepository.getHorario(createTurnoDto.horarioId);
-        
-        if(!existeHorario){
-            throw new Error('El horario no existe');
-        }
-
-        const existePago = await this.tipoPagosRepository.getTipoPagoById(createTurnoDto.tipoPagoId);
-        if(!existePago){
-            throw new Error('El tipo de pago no existe');
-        }
+        if(validations){}
 
         const create = this.turnosRepository.create(createTurnoDto);
         return this.turnosRepository.save(create);
@@ -62,6 +45,34 @@ export class TurnoRepository {
 
     async editTurno(id: number, editTurnoDto: any){
         return await this.turnosRepository.update({ id }, editTurnoDto);
+    }
+
+    //Con este metodo separo las responsabilidades
+    async validationsCreateTurno(createTurnoDto: CreateTurnoDto): Promise <boolean >{
+        const existeHorario = await this.horariosRepository.getHorario(createTurnoDto.horarioId);
+                
+        if(!existeHorario){
+            throw new Error('El horario no existe');
+        }
+
+        // const existeTurno = await this.turnosRepository.findOne({where: { horario: createTurnoDto.horarioId }});
+                
+        // if(existeTurno){
+        //     throw new Error('Ya existe un turno para el horario seleccionado');
+        // }
+
+        const existeUsuario = await this.usuarioRepository.getUsuario(createTurnoDto.usuarioId);
+                
+        if(!existeUsuario){
+            throw new Error('El usuario no existe');
+        }
+
+        const existePago = await this.tipoPagosRepository.getTipoPagoById(createTurnoDto.tipoPagoId);
+        if(!existePago){
+            throw new Error('El tipo de pago no existe');
+        }
+
+        return true
     }
 
 

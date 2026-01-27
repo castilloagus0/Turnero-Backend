@@ -6,11 +6,9 @@ import {
 
 export class CreateTurnoDto {
 
-  @IsString()
-  horaInicio: string;
 
-  @IsString()
-  horaFin: string;
+  @IsNumber()
+  horarioId: number;
 
   @IsNumber()
   usuarioId: number;
