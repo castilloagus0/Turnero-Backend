@@ -19,4 +19,8 @@ export class CorteBarbaStrategy implements ServicioStrategy {
     getDuracionAproximada(): number {
         return 25; 
     }
+
+     getServicioActivo(): boolean {
+        return true
+    }
 }

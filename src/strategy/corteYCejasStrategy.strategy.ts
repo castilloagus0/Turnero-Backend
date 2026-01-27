@@ -9,7 +9,6 @@ export class CorteCejasStrategy implements ServicioStrategy {
     seleccionarTurno(): void {}
 
     getNombre(): string {
-        console.log("entra aca")
         return 'Corte y Cejas';
     }
 
@@ -19,5 +18,9 @@ export class CorteCejasStrategy implements ServicioStrategy {
 
     getDuracionAproximada(): number {
         return 20; 
+    }
+
+    getServicioActivo(): boolean {
+        return true
     }
 }

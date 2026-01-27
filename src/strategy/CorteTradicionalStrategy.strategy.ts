@@ -19,4 +19,8 @@ export class CorteTradicional implements ServicioStrategy {
     getDuracionAproximada(): number {
         return 20; 
     }
+
+     getServicioActivo(): boolean {
+        return true
+    }
 }

@@ -14,5 +14,8 @@ export class AbstractServicioB {
 
   @Column({ type: 'int' })
   duracionAproximada: number; 
+
+  @Column({ type: 'boolean' })
+  activo: boolean;
 }
 

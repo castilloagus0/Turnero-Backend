@@ -9,4 +9,6 @@ export interface ServicioStrategy {
 
     getDuracionAproximada(): number;
 
+     getServicioActivo(): boolean; 
+
 }
