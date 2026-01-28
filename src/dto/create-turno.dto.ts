@@ -5,10 +5,12 @@ import {
 } from "class-validator";
 
 export class CreateTurnoDto {
+  @IsString()
+  horaIncio: string;
 
 
-  @IsNumber()
-  horarioId: number;
+  @IsString()
+  horaFin: string;
 
   @IsNumber()
   usuarioId: number;

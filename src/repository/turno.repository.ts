@@ -9,7 +9,6 @@ import { HorariosRepository } from "./horarios.repository";
 import { TipoPagosRepository } from "./tipoPagos.repository";
 import { CreateTurnoDto } from "src/dto/create-turno.dto";
 
-
 @Injectable()
 export class TurnoRepository {
     constructor(
@@ -26,6 +25,13 @@ export class TurnoRepository {
 
     async getTurno(id: number): Promise<Turnos | null> {
         return await this.turnosRepository.findOne({where: { id }});
+    }
+
+    async getTurnoExiste(horarioId: string, estado: string): Promise<Turnos[] | null>{
+        return await this.turnosRepository.createQueryBuilder('turnos')
+        .where('turnos.horario_id = :horarioId', { horarioId: horarioId })
+        .andWhere('turnos.estado = :estado', { estado: estado }) 
+        .getMany();    
     }
 
     async createTurno(createTurnoDto: any){
@@ -49,17 +55,18 @@ export class TurnoRepository {
 
     //Con este metodo separo las responsabilidades
     async validationsCreateTurno(createTurnoDto: CreateTurnoDto): Promise <boolean >{
-        const existeHorario = await this.horariosRepository.getHorario(createTurnoDto.horarioId);
-                
-        if(!existeHorario){
-            throw new Error('El horario no existe');
+
+        const horarioId = await this.horariosRepository.getHorarioXHora(createTurnoDto.horaIncio)
+
+        if(horarioId !== null){
+            throw new Error('No existe ese horario')
         }
 
-        // const existeTurno = await this.turnosRepository.findOne({where: { horario: createTurnoDto.horarioId }});
+        const existeTurno = await this.getTurnoExiste('', 'PENDIENTE')
                 
-        // if(existeTurno){
-        //     throw new Error('Ya existe un turno para el horario seleccionado');
-        // }
+        if(existeTurno){
+            throw new Error('Ya existe un turno para el horario seleccionado');
+        }
 
         const existeUsuario = await this.usuarioRepository.getUsuario(createTurnoDto.usuarioId);
                 

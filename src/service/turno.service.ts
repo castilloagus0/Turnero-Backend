@@ -13,6 +13,10 @@ export class TurnoService {
         return await this.turnoRepository.getTurno(id);
     }
 
+    async getTurnoExistente(horarioId: string, estado: string){
+        return await this.turnoRepository.getTurnoExiste(horarioId, estado)
+    }
+
     async createTurno(turno) {
         return await this.turnoRepository.createTurno(turno);
     }

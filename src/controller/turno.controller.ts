@@ -17,6 +17,11 @@ export class TurnoController {
         return this.turnoService.getTurnoById(id);
     }
 
+    @Get(':horarioInicio/:estado')
+    async getTurnoExiste(@Param('horarioInicio') horarioInicio: string, @Param('estado') estado: string) {
+        return this.turnoService.getTurnoExistente(horarioInicio, estado);
+    }
+
     @Post('create')
     async createTurno(@Body() createTurnoDto: CreateTurnoDto) {
         return this.turnoService.createTurno(createTurnoDto);

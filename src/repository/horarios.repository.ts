@@ -20,6 +20,10 @@ export class HorariosRepository {
         return await this.horariosRepository.findOne({where: { id }});
     }
 
+    async getHorarioXHora(horaInicio: string): Promise<Horarios | null> {
+        return await this.horariosRepository.findOne({where : { horaInicio }})
+    }
+
     async createHorarios(createHorario: any){
         const create = await this.horariosRepository.create(createHorario);
         return await this.horariosRepository.save(create);
